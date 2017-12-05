@@ -10,13 +10,21 @@
   $(document).ready(function(){
     $(".su").click(function(){
       var lol=$(".nameclass").val()
-      var url="http://localhost:8080/addname?name="+lol+"&ids="+fingerprint
+      var height=$(".heightclass").val()
+      var weight=$(".weightclass").val()
+      var url="http://localhost:8080/addname?name="+lol+"&ids="+fingerprint+"&height="+height+"&weight="+weight
       console.log(url)
       window.location = url;
   })})
 </script>
-  Name:<br>
+  Name:
   <input class="nameclass" type="text" name="name" value="">
+  <br>
+  Height:
+  <input class="heightclass" type="text" name="name" value="">
+  <br>
+  Weight:
+  <input class="weightclass" type="text" name="name" value="">
   <br>
   <input class="su" type="submit" value="Submit">
 </form>

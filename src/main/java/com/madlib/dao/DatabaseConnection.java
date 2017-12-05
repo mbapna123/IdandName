@@ -12,8 +12,8 @@ public class DatabaseConnection implements DatabaseInterface  {
 	private EntityManager entityManager;
 	
 	@Override
-	public void insertname(String name, String fingerprint) {
-		Entitie newE=new Entitie(name,fingerprint);
+	public void insertname(String name, String fingerprint, float height, float weight) {
+		Entitie newE=new Entitie(name,fingerprint, height, weight);
 		entityManager.persist(newE);
 	}	
 

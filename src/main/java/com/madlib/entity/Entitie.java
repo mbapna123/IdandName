@@ -7,15 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table(name="idtable2")
+@Table(name="idtable3")
 public class Entitie implements Serializable{
 	
 	public Entitie() {
 	}
 	
-	public Entitie(String name,String fingerprint) {
+	public Entitie(String name,String fingerprint, float height, float weight) {
 		this.name=name;
 		this.fingerprint=fingerprint;
+		this.height=height;
+		this.weight=weight;
 	}
 	
 	private static final long serialVersionUID = 1L;
@@ -27,6 +29,10 @@ public class Entitie implements Serializable{
     private String fingerprint;
 	@Column(name="name")	
 	private String name;
+	@Column(name="height")	
+	private float height;
+	@Column(name="weight")	
+	private float weight;
 	public int getId() {
 		return id;
 	}
@@ -44,5 +50,17 @@ public class Entitie implements Serializable{
 	}
 	public void setCategory(String name) {
 		this.name = name;
+	}
+	public float getheight() {
+		return height;
+	}
+	public void setHeight(float height) {
+		this.height = height;
+	}
+	public float getweight() {
+		return weight;
+	}
+	public void setWeight(float weight) {
+		this.weight = weight;
 	}
 }

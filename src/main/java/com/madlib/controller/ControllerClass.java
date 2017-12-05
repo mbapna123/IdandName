@@ -1,4 +1,6 @@
 package com.madlib.controller;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +29,9 @@ import com.madlib.service.EntityService;
 public class ControllerClass {
 	@Autowired
 	private EntityService entityserv;
-	
 	@GetMapping("addname")
-	public String addthename(@RequestParam String name, @RequestParam String ids) {
-		int numb=entityserv.addname(name,ids);
+	public String addthename(@RequestParam String name, @RequestParam String ids,  @RequestParam float height,  @RequestParam float weight) {
+		int numb=entityserv.addname(name,ids, height, weight);
 		if(numb==0) {
 			return "unsuccessful.jsp";
 		}
@@ -46,9 +47,18 @@ public class ControllerClass {
 		return "listnames.jsp";
 	}
 
-//@GetMapping("namesbypopularity")
-//	public String getnamesbypopularity(ModelMap model) {
-//	List<Entitie> names=(List<Entitie>) model.get("listofnames");
-//	
-//}
+@GetMapping("infoonhumans")
+	public String humaninfo(ModelMap model) {
+	ArrayList<Float> heightarr=entityserv.getHeightArray();
+	ArrayList<Float> weightarr=entityserv.getWeightArray();
+	float heightavg=entityserv.getaveragearray(heightarr);
+	float weightavg=entityserv.getaveragearray(weightarr);
+	model.addAttribute("heightarray", heightarr);
+	model.addAttribute("weightarray",weightarr);
+	model.addAttribute("weightavg",weightavg);
+	model.addAttribute("heightavg",heightavg);
+	return("humaninfo.jsp");
+}
+
+
 }

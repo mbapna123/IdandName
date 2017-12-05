@@ -16,5 +16,6 @@
             <br>
         </tr>
     </c:forEach>
+<a href="http://localhost:8080/infoonhumans"> Height-Weight Information</a>
 </body>
 </html>
