@@ -1,5 +1,6 @@
 package com.madlib.controller;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -51,8 +52,10 @@ public class ControllerClass {
 	public String humaninfo(ModelMap model) {
 	ArrayList<Float> heightarr=entityserv.getHeightArray();
 	ArrayList<Float> weightarr=entityserv.getWeightArray();
+	ArrayList<Float []> heightweight=entityserv.getHeightWeight();
 	float heightavg=entityserv.getaveragearray(heightarr);
 	float weightavg=entityserv.getaveragearray(weightarr);
+	model.addAttribute("heightweight", heightweight);
 	model.addAttribute("heightarray", heightarr);
 	model.addAttribute("weightarray",weightarr);
 	model.addAttribute("weightavg",weightavg);

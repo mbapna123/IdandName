@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.madlib.dao.DatabaseInterface;
 import com.madlib.entity.Entitie;
+import com.mysql.fabric.xmlrpc.base.Array;
 @Service
 public class EntityService implements EntityInterface {
 	
 	private ArrayList<Float> heightarray=new ArrayList<Float>();
 	private ArrayList<Float> weightarray=new ArrayList<Float>();
+	private ArrayList<Float[]> heightweight=new ArrayList<Float[]>();
 	@Autowired
 	private DatabaseInterface DaInterface;
 	
@@ -25,6 +27,8 @@ public class EntityService implements EntityInterface {
 			DaInterface.insertname(nameo, fingerprinto, height, weight);
 			heightarray.add(height);
 			weightarray.add(weight);
+			Float[] arr= {height,weight};
+			heightweight.add(arr);
 			return 1;
 		}
 	}
@@ -36,6 +40,11 @@ public class EntityService implements EntityInterface {
 	public ArrayList<Float> getHeightArray(){
 		return heightarray;
 	}
+	
+	public ArrayList<Float[]> getHeightWeight(){
+		return heightweight;
+	}
+	
 	public ArrayList<Float> getWeightArray(){
 		return weightarray;
 	}
@@ -49,4 +58,5 @@ public float getaveragearray(ArrayList<Float>arrays) {
 	 float avg=sum/arrays.size();
 	 return avg;
 }
+
 }
