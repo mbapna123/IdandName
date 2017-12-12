@@ -1,8 +1,12 @@
 package com.madlib.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.madlib.entity.Entitie;
+import com.madlib.entity.MovieClass;
+import com.madlib.service.EntityInterface;
 import com.madlib.service.EntityService;
 import com.madlib.entity.Entitie;
 import com.madlib.service.EntityService;
@@ -30,9 +36,24 @@ import com.madlib.service.EntityService;
 public class ControllerClass {
 	@Autowired
 	private EntityService entityserv;
+//	
+//	@PostConstruct
+//	  public void init(){
+//		entityserv.initialize();
+//	  }
+//	
+	@GetMapping("removename")
+	public void removename(@RequestParam String ids) {
+		entityserv.removethename(ids);
+	}
+	@GetMapping("updatename")
+		public void updatename(@RequestParam String name, @RequestParam String ids,  @RequestParam float height,  @RequestParam float weight, @RequestParam String movie, @RequestParam String movie1) {
+			entityserv.update(name, ids, height, weight, movie, movie1);
+		}
+	
 	@GetMapping("addname")
-	public String addthename(@RequestParam String name, @RequestParam String ids,  @RequestParam float height,  @RequestParam float weight) {
-		int numb=entityserv.addname(name,ids, height, weight);
+	public String addthename(@RequestParam String name, @RequestParam String ids,  @RequestParam float height,  @RequestParam float weight, @RequestParam String movie, @RequestParam String movie1) {
+		int numb=entityserv.addname(name,ids, height, weight, movie,movie1);
 		if(numb==0) {
 			return "unsuccessful.jsp";
 		}

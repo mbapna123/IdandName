@@ -1,10 +1,13 @@
 package com.madlib.service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.madlib.dao.DatabaseInterface;
 import com.madlib.entity.Entitie;
+import com.madlib.entity.MovieClass;
 import com.mysql.fabric.xmlrpc.base.Array;
 @Service
 public class EntityService implements EntityInterface {
@@ -15,16 +18,24 @@ public class EntityService implements EntityInterface {
 	@Autowired
 	private DatabaseInterface DaInterface;
 	
+	@Override
+	public void initialize() {
+		DaInterface.initial();
+	}
 	
 	@Override
-	public int addname(String nameo, String fingerprinto, float height, float weight){
+	public void removethename(String ids) {
+		DaInterface.removenamee(ids);
+	}
+	@Override
+	public int addname(String nameo, String fingerprinto, float height, float weight, String movie, String movie1){
 		List<Entitie> fingerlist=DaInterface.getEntitiesFingerprint(fingerprinto);
 		int numberfingerent=fingerlist.size();
 		if (numberfingerent==1) {
 			return 0;
 		}
 		else{
-			DaInterface.insertname(nameo, fingerprinto, height, weight);
+			DaInterface.insertname(nameo, fingerprinto, height, weight, movie,movie1);
 			heightarray.add(height);
 			weightarray.add(weight);
 			Float[] arr= {height,weight};
@@ -58,5 +69,11 @@ public float getaveragearray(ArrayList<Float>arrays) {
 	 float avg=sum/arrays.size();
 	 return avg;
 }
+
+	public void update(String name, String ids, float height, float weight, String movie, String movie2) {
+		List<Entitie> fingerid=DaInterface.getEntitiesFingerprint(ids);
+		int id=fingerid.get(0).getId();
+		DaInterface.update(id, name, height, weight, movie, movie2);
+	}
 
 }
