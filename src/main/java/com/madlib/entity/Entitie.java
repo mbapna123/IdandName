@@ -16,17 +16,16 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 @Entity
-@Table(name="idtaa")
+@Table(name="Person")
 public class Entitie implements Serializable{
 	
 	public Entitie() {
 	}
 	
-	public Entitie(String name,String fingerprint, float height, float weight) {
+	public Entitie(String name, String city, String fingerprint) {
 		this.name=name;
 		this.fingerprint=fingerprint;
-		this.height=height;
-		this.weight=weight;
+		this.city=city;
 		}
 	
 	private static final long serialVersionUID = 1L;
@@ -38,15 +37,13 @@ public class Entitie implements Serializable{
 	
 	private String name;
 	
-	private float height;
+	private String city;
 		
-	private float weight;
-	
-	private Set<MovieClass> movies;
+	private Set<MVPClass> mvpclass;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name="idperson")
 	public int getId() {
 		return id;
 	}
@@ -61,31 +58,28 @@ public class Entitie implements Serializable{
 	public void setFingerprint(String fingerprint) {
 		this.fingerprint = fingerprint;
 	}
+	@Column(name="Name")
 	public String getname() {
 		return name;
 	}
 	public void setname(String name) {
 		this.name = name;
 	}
-	public float getheight() {
-		return height;
+	@Column(name="City")
+	public String getCity() {
+		return city;
 	}
-	public void setHeight(float height) {
-		this.height = height;
+	public void setCity(String city) {
+		this.city = city;
 	}
-	public float getweight() {
-		return weight;
-	}
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
-	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "movieha",joinColumns = @JoinColumn(name = "human_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
-public Set<MovieClass> getMovies() {
-	return movies;
+@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE})
+@JoinTable(name = "MVPPerson",joinColumns = @JoinColumn(name = "idperson", referencedColumnName = "personid"), inverseJoinColumns = @JoinColumn(name = "mvpid", referencedColumnName = "mvpid"))
+public Set<MVPClass> getMVPClass() {
+	return mvpclass;
 }
 
-public void setMovies(Set<MovieClass> movies) {
-	this.movies = movies;
+public void setMVPClass(Set<MVPClass> mvpclass) {
+	this.mvpclass = mvpclass;
 	}
+
 }

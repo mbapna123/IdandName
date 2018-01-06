@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1> Name has been added to the database.</h1>
-<a href="http://localhost:8080/listofnames"> Listofnames</a>
+<h1> Info has been added to the database.</h1>
+<a href="http://localhost:8080/allinfo"> Whole MVP Data</a>
+<h6> Type http://localhost:8080/cityinfo/{cityname} for MVP Data from a particular city. </h6>
 </body>
 </html>

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.madlib.dao.DatabaseInterface;
 import com.madlib.entity.Entitie;
-import com.madlib.entity.MovieClass;
+import com.madlib.entity.MVPClass;
 import com.mysql.fabric.xmlrpc.base.Array;
 @Service
 public class EntityService implements EntityInterface {
@@ -28,18 +28,14 @@ public class EntityService implements EntityInterface {
 		DaInterface.removenamee(ids);
 	}
 	@Override
-	public int addname(String nameo, String fingerprinto, float height, float weight, String movie, String movie1){
+	public int addname(String nameo, String fingerprinto, String city, String mvp, String mvp2){
 		List<Entitie> fingerlist=DaInterface.getEntitiesFingerprint(fingerprinto);
 		int numberfingerent=fingerlist.size();
 		if (numberfingerent==1) {
 			return 0;
 		}
 		else{
-			DaInterface.insertname(nameo, fingerprinto, height, weight, movie,movie1);
-			heightarray.add(height);
-			weightarray.add(weight);
-			Float[] arr= {height,weight};
-			heightweight.add(arr);
+			DaInterface.insertname(nameo, fingerprinto, city, mvp, mvp2);
 			return 1;
 		}
 	}
@@ -48,32 +44,15 @@ public class EntityService implements EntityInterface {
 	public List<Entitie> getEntitiess(){
 		return DaInterface.getEntities();
 	}
-	public ArrayList<Float> getHeightArray(){
-		return heightarray;
-	}
-	
-	public ArrayList<Float[]> getHeightWeight(){
-		return heightweight;
-	}
-	
-	public ArrayList<Float> getWeightArray(){
-		return weightarray;
+
+
+	@Override
+	public ArrayList<Integer> infocity(String city) {
+		return DaInterface.getinfocity(city);
 	}
 
 	@Override
-public float getaveragearray(ArrayList<Float>arrays) {
-	float sum=0;
-	 for (Float mark : arrays) {
-	        sum += mark;
-	    }
-	 float avg=sum/arrays.size();
-	 return avg;
-}
-
-	public void update(String name, String ids, float height, float weight, String movie, String movie2) {
-		List<Entitie> fingerid=DaInterface.getEntitiesFingerprint(ids);
-		int id=fingerid.get(0).getId();
-		DaInterface.update(id, name, height, weight, movie, movie2);
+	public ArrayList<Integer> info() {
+		return DaInterface.getinfo();
 	}
-
 }

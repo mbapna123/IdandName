@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.madlib.entity.Entitie;
-import com.madlib.entity.MovieClass;
+import com.madlib.entity.MVPClass;
 import com.madlib.service.EntityInterface;
 import com.madlib.service.EntityService;
 import com.madlib.entity.Entitie;
@@ -46,14 +46,10 @@ public class ControllerClass {
 	public void removename(@RequestParam String ids) {
 		entityserv.removethename(ids);
 	}
-	@GetMapping("updatename")
-		public void updatename(@RequestParam String name, @RequestParam String ids,  @RequestParam float height,  @RequestParam float weight, @RequestParam String movie, @RequestParam String movie1) {
-			entityserv.update(name, ids, height, weight, movie, movie1);
-		}
 	
 	@GetMapping("addname")
-	public String addthename(@RequestParam String name, @RequestParam String ids,  @RequestParam float height,  @RequestParam float weight, @RequestParam String movie, @RequestParam String movie1) {
-		int numb=entityserv.addname(name,ids, height, weight, movie,movie1);
+	public String addthename(@RequestParam String name, @RequestParam String ids,  @RequestParam String city,  @RequestParam String mvp, @RequestParam String mvp2) {
+		int numb=entityserv.addname(name,ids, city, mvp,mvp2);
 		if(numb==0) {
 			return "unsuccessful.jsp";
 		}
@@ -62,27 +58,18 @@ public class ControllerClass {
 		}
 	}
 	
-@GetMapping("listofnames")
-	public String getlistofnames(ModelMap model) {
-		List<Entitie> listofnames= entityserv.getEntitiess();
-		model.addAttribute("listofnames",listofnames);
-		return "listnames.jsp";
+	@GetMapping("cityinfo/{city}")
+	public String getlistofnames(ModelMap model, @PathVariable String city) {
+		ArrayList<Integer> listcity= entityserv.infocity(city);
+		model.addAttribute("listcity",listcity);
+		return "listcity.jsp";
 	}
 
-@GetMapping("infoonhumans")
-	public String humaninfo(ModelMap model) {
-	ArrayList<Float> heightarr=entityserv.getHeightArray();
-	ArrayList<Float> weightarr=entityserv.getWeightArray();
-	ArrayList<Float []> heightweight=entityserv.getHeightWeight();
-	float heightavg=entityserv.getaveragearray(heightarr);
-	float weightavg=entityserv.getaveragearray(weightarr);
-	model.addAttribute("heightweight", heightweight);
-	model.addAttribute("heightarray", heightarr);
-	model.addAttribute("weightarray",weightarr);
-	model.addAttribute("weightavg",weightavg);
-	model.addAttribute("heightavg",heightavg);
-	return("humaninfo.jsp");
-}
-
+@GetMapping("allinfo")
+	public String getlist(ModelMap model) {
+	ArrayList<Integer> listall= entityserv.info();
+		model.addAttribute("listall",listall);
+		return "listall.jsp";
+	}
 
 }

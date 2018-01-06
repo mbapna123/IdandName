@@ -3,21 +3,22 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="movia")
-public class MovieClass {
+@Table(name="MVP")
+public class MVPClass {
 	private int id;
-    private String name;
+    private String mvp;
     private Set<Entitie> humans;
 
-    public MovieClass(){
+    public MVPClass(){
     }
 
-    public MovieClass(String name){
-        this.name = name;
+    public MVPClass(String mvp){
+        this.mvp = mvp;
+    
     }
     @Id
     @GeneratedValue
-    @Column(name="id")
+    @Column(name="mvpid")
     public int getId() {
         return id;
     }
@@ -25,16 +26,16 @@ public class MovieClass {
     public void setId(int id) {
         this.id = id;
     }
-    @Column(name="movie")
-    public String getName() {
-        return name;
+    @Column(name="mvp")
+    public String getMVP() {
+        return mvp;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMVP(String mvp) {
+        this.mvp = mvp;
     }
     
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "mvpclass",cascade= {CascadeType.PERSIST, CascadeType.MERGE})
     public Set<Entitie> getHumans() {
         return humans;
     }
@@ -43,5 +44,8 @@ public class MovieClass {
         this.humans = humans;
     }
     
+    public void addHuman(Entitie ent) {
+    	
+    }
     
 }

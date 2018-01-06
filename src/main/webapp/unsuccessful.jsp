@@ -8,5 +8,7 @@
 </head>
 <body>
 <h1> Same computer cannot be used. Name can't be added to the database!</h1>
+<a href="http://localhost:8080/allinfo"> Whole MVP Data</a>
+<h6> Type http://localhost:8080/cityinfo/{cityname} for MVP Data from a particular city. </h6>
 </body>
 </html>
