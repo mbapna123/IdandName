@@ -16,22 +16,22 @@
                "Harden",
                "Durant",
             ];
-            $( ".weightclass" ).autocomplete({
+            $( ".mvp11class" ).autocomplete({
                source: mvps
             });
             $( ".sub" ).autocomplete({
                source: mvps
             });
     $(".su").click(function(){
-      var lol=$(".nameclass").val()
-      var height=$(".heightclass").val();
-      var weight=$(".weightclass").val();
-      var cray=$(".sub").val();
-      if (weight==cray){
+      var namee=$(".nameclass").val()
+      var cityyy=$(".cityyyclass").val();
+      var mvp11=$(".mvp11class").val();
+      var mvp22=$(".sub").val();
+      if (mvp11==mvp22){
         alert("MVP's must be different!")
         return;
       }
-      var url="http://localhost:8080/addname?name="+lol+"&ids="+fingerprint+"&city="+height+"&mvp="+weight+"&mvp2"+cray;
+      var url="http://localhost:8080/addname?name="+namee+"&ids="+fingerprint+"&city="+cityyy+"&mvp="+mvp11+"&mvp2"+mvp22;
       console.log(url)
       window.location = url;
   })})
@@ -40,10 +40,10 @@
   <input class="nameclass" type="text" name="name" value="">
   <br>
   City:
-  <input class="heightclass" type="text" name="name" value="">
+  <input class="cityyyclass" type="text" name="name" value="">
   <br>
   MVP1:
-  <input class="weightclass" type="text" name="name" value="">
+  <input class="mvp11class" type="text" name="name" value="">
   <br>
   MVP2:
   <input class="sub" type="text" name="name" value="">
