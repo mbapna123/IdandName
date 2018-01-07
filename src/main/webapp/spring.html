@@ -1,6 +1,9 @@
 <html>
 <head>
   <script type = "text/javascript"  src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+        rel = "stylesheet">
+     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
   <script type="text/javascript" src="fingerprint.js"> </script>
 </head>
 <body>
@@ -8,11 +11,27 @@
   var fingerprint = new Fingerprint().get().toString();
   console.log(fingerprint)
   $(document).ready(function(){
+    var mvps  =  [
+               "James",
+               "Harden",
+               "Durant",
+            ];
+            $( ".weightclass" ).autocomplete({
+               source: mvps
+            });
+            $( ".sub" ).autocomplete({
+               source: mvps
+            });
     $(".su").click(function(){
       var lol=$(".nameclass").val()
-      var height=$(".heightclass").val()
-      var weight=$(".weightclass").val()
-      var url="http://localhost:8080/addname?name="+lol+"&ids="+fingerprint+"&height="+height+"&weight="+weight
+      var height=$(".heightclass").val();
+      var weight=$(".weightclass").val();
+      var cray=$(".sub").val();
+      if (weight==cray){
+        alert("MVP's must be different!")
+        return;
+      }
+      var url="http://localhost:8080/addname?name="+lol+"&ids="+fingerprint+"&city="+height+"&mvp="+weight+"&mvp2"+cray;
       console.log(url)
       window.location = url;
   })})
@@ -20,11 +39,14 @@
   Name:
   <input class="nameclass" type="text" name="name" value="">
   <br>
-  Height (cm):
+  City:
   <input class="heightclass" type="text" name="name" value="">
   <br>
-  Weight(kg):
+  MVP1:
   <input class="weightclass" type="text" name="name" value="">
+  <br>
+  MVP2:
+  <input class="sub" type="text" name="name" value="">
   <br>
   <input class="su" type="submit" value="Submit">
 </form>
